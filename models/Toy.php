@@ -1,18 +1,41 @@
 <?php
-require_once __DIR__ . "/Product.php";
+include_once __DIR__ . '/Product.php';
+class Game extends Product{
+    private String $size;
+    private Array $material;
 
-class Toy extends Product
-{
-    public $tipo_materiale;
-
-    function __construct($_image, $_name, $_description, $_price, $_tipo_materiale)
+    function __construct(String $_title, String $_image, Float $_price, Category $_category,String $_size, Array $_material)
     {
-        parent::__construct($_image, $_name, $_description, $_price);
-        $this->tipo_materiale = $_tipo_materiale;
+        parent::__construct($_title, $_image, $_price, $_category);
+        $this->setsize($_size);
+        $this->setmaterial($_material);
     }
 
-    public function getMateriale()
+    public function getsize()
     {
-        return $this->tipo_materiale;
+        return $this->size;
+    }
+
+    public function setsize($size)
+    {
+        if(strlen($size)){
+            $this->size = $size;
+        }else{
+            $this->size = "Piccolo";
+        }
+        return $this;
+    }
+    public function getmaterial()
+    {
+        return $this->material;
+    }
+    public function setmaterial($material)
+    {
+        if(count($material)){
+            $this->material = $material;
+        }else{
+            $this->material = ["Unknown"];
+        }
+        return $this;
     }
 }

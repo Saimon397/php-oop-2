@@ -1,115 +1,58 @@
 <?php
-require_once __DIR__ . "./models/Food.php";
-require_once __DIR__ . "./models/Toy.php";
-require_once __DIR__ . "./models/Accessory.php";
-require_once __DIR__ . "./models/Utente.php";
-
-$categoriaGatto = new Category('gatto', 'cat.png');
-$categoriaCane = new Category('cane', 'dog.png');
-
-$pet_food = new Food("croccantini.jpg", "PetFood", "Croccantini di alta qualità per animali", 3.99, "20/02/2023", $categoriaCane);
-$pet_toy = new Toy("osso.jpg", "PetToy", "Osso", 5.99, "gomma", $categoriaCane);
-$pet_accessory = new Accessory("ciotola.jpg", "Ciotola", "Ciotola ", 49.99, "CiotoPlus", $categoriaGatto);
-$pet_accessory2 = new Accessory("collare.jpg", "Collare", "Collare personalizzato", 6.99, "Amici a quattro zampe", $categoriaGatto);
-
-// Utente
-
-$UtenteProva = new User("UtenteProva", "utenteprova@gmail.com", 121545459865, true, true);
-$UtenteProva->addToCart($pet_accessory);
-$UtenteProva->addToCart($pet_food);
-$UtenteProva->addToCart($pet_food);
-
+// Silence is golden
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./css/style.css">
-    <title>Pet Shop</title>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel='shortcut icon' href='#'>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css' integrity='sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==' crossorigin='anonymous' referrerpolicy='no-referrer' />
+    <link rel='stylesheet' href='./css/style.css'>
+    <script src='https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js'></script>
+    <script src='https://unpkg.com/vue@3/dist/vue.global.js'></script>
+    <script src='./js/script.js' defer></script>
+    <title>PetShop</title>
 </head>
 
 <body>
-    <header class="position-sticky sticky-top my-borderb">
-        <nav class="navbar bg-white">
-            <div class="container-fluid">
-                <a class="navbar-brand fs-1 fw-bold" href="#">
-                    <img class="wlogo" src="./img/Logo.jpg" alt="Logo" class="d-inline-block align-text-top">
-                    Pet Shop
-                </a>
+    <div class="container" id="app">
+        <div class="d-flex justify-content-center mb-5"><img src="./img/Logo.jpg" alt="" class="wlogoform"></div>
+        <div class="form">
+            <div class="inner-form">
+                <form action="PetShop.php" method="post" v-show="viewForm == 'login'">
+                    <input type="text" hidden name="guest" value="guest">
+                    <button class="btn btn-light">Entra come Ospite</button>
+                </form>
+                <button class="btn btn-light ms-5 " @click="setView('user')" v-show="viewForm == 'login'">Registrati</button>
+                <form action="PetShop.php" method="post" v-show="viewForm == 'user'">
+                    <div class="row">
+                        <label for="" class="p-0 text-white">Indirizzo e-mail..</label>
+                        <input type="email" class="p-0 mb-3" required name="email">
+                        <label for="" class="p-0 text-white">Password..</label>
+                        <input type="password" class="p-0 mb-3" required name="password">
+                    </div>
+                    <div class="row">
+                        <label for="" class="p-0 text-white">Numero della carta..</label>
+                        <input type="text" class="p-0 mb-3" required name="cardNumber">
+                        <label for="" class="p-0 text-white">Data di scadenza della carta (es. 2025-05)</label>
+                        <input type="text" class="p-0 mb-3" required name="expireDate">
+                    </div>
+                    <div class="d-flex justify-content-center mt-5">
+                        <button class="btn btn-light me-5" @click.prevent="setView('login')">Indietro</button>
+                        <button class="btn btn-light">Invia</button>
+                    </div>
+                </form>
             </div>
-        </nav>
-    </header>
-    <main>
-        <div class="d-flex justify-content-center mt-5">
-            <section class="">
-                <h2 class="mb-5">Prodotti disponibili:</h2>
-                <div class="card-2 mb-3 d-flex justify-content-center">
-                    <div><img src="./img/<?php echo $pet_food->getImage() ?>" alt="" class="img-prod"></div>
-                    <div class="info">
-                        <div class="name mb-4"><?php echo $pet_food->getName()  ?></div>
-                        <div class="price mb-4"><?php echo $pet_food->getPrice() . ' €'  ?></div>
-                        <div class="description"><?php echo $pet_food->getDescription()  ?></div>
-                    </div>
-                </div>
-                <div class="card-2 mb-3 d-flex justify-content-center">
-                    <div><img src="./img/<?php echo $pet_toy->getImage() ?>" alt="" class="img-prod"></div>
-                    <div class="info">
-                        <div class="name mb-4"><?php echo $pet_toy->getName()  ?></div>
-                        <div class="price mb-4"><?php echo $pet_toy->getPrice() . ' €'  ?></div>
-                        <div class="description mb-4"><?php echo $pet_toy->getDescription()  ?></div>
-                    </div>
-                </div>
-                <div class="card-2 mb-3 d-flex justify-content-center">
-                    <div><img src="./img/<?php echo $pet_accessory->getImage() ?>" alt="" class="img-prod"></div>
-                    <div class="info">
-                        <div class="name mb-4"><?php echo $pet_accessory->getName()  ?></div>
-                        <div class="price mb-4"><?php echo $pet_accessory->getPrice() . ' €'  ?></div>
-                        <div class="description mb-4"><?php echo $pet_accessory->getDescription()  ?></div>
-                    </div>
-                </div>
-                <div class="card-2 mb-3 d-flex justify-content-center">
-                    <div><img src="./img/<?php echo $pet_accessory2->getImage() ?>" alt="" class="img-prod"></div>
-                    <div class="info">
-                        <div class="name mb-4"><?php echo $pet_accessory2->getName()  ?></div>
-                        <div class="price mb-4"><?php echo $pet_accessory2->getPrice() . ' €'  ?></div>
-                        <div class="description mb-4"><?php echo $pet_accessory2->getDescription()  ?></div>
-                    </div>
-                </div>
-            </section>
         </div>
-
-        <section class="card-2">
-            <h2 class="mb-5">Ciao <?php echo $UtenteProva->name; ?>. Ecco il tuo carrello:</h2>
-            <ul>
-                <?php foreach ($UtenteProva->cart as $item) { ?>
-                    <li>
-                        <div class="d-flex justify-content-center">
-                            <?php echo $item->getName() ?>
-                            <?php echo $item->getPrice() . ' €'  ?>
-
-                        </div>
-                    </li>
-                    <br>
-                <?php } ?>
-            </ul>
-        </section>
-
-        </div>
-        <section class="mt-5 d-flex justify-content-center">
-            <div class="card-1">
-                <h2 class="me-5 card-2">Totale: € <?php echo $UtenteProva->getTotalPrice(); ?></h2>
-                <h3 class="card-2">
-                    <?php echo $UtenteProva->checkCDC(); ?>
-                </h3>
-            </div>
-        </section>
-    </main>
+    </div>
 </body>
 
 </html>

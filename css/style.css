@@ -1,3 +1,5 @@
+/***STYLE***/
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +7,7 @@
 }
 
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif;
     background-color: rgb(255, 166, 0);
 }
 
@@ -17,48 +19,64 @@ body {
     width: 230px;
 }
 
-h2 {
+.wlogoform {
+    margin-top: 200px !important;
+    width: 500px;
+    border-radius: 100%;
+    box-shadow: 5px 2px 2px 2px whitesmoke;
+}
+
+.img-prod {
+    width: 300px;
+    height: 400px;
+}
+
+h1 {
     color: whitesmoke;
     font-size: 5rem;
     text-align: center !important;
     font-weight: bold;
 }
 
-.card-1 {
+.my-card {
     background-color: white;
-    padding: 100px;
     border-radius: 10px;
     box-shadow: 5px 2px 2px 2px whitesmoke;
+    position: relative;
+    flex: 0 0 auto;
+    margin: 10px;
+    width: calc(100% / 3 - 20px);
 }
 
-.card-2 {
-    background-color: white;
-    padding: 100px 250px 250px;
-    border-radius: 10px;
-    box-shadow: 5px 2px 2px 2px whitesmoke;
+.icon {
+    position: absolute;
+    width: 50px;
+    top: 10px;
+    right: 10px;
 }
 
-li {
-    list-style: none;
+.info>* {
+    padding-bottom: 0.2rem;
 }
 
-.img-prod {
-    width: 500px;
-}
-
-.info {
-    padding: 50px;
-}
-
-.name {
-    font-size: 3rem;
+.title {
+    font-size: 1.3rem;
     font-weight: bold;
 }
 
 .price {
-    font-size: 2rem;
+    font-size: 1.1rem;
+    color: red;
 }
 
-.description {
-    font-size: 2rem;
+/***LOGGIN-PAGE***/
+.form {
+    background-color: rgb(255, 166, 0);
+}
+
+.inner-form {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
