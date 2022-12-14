@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(255, 166, 0);
+}
+
+.my-borderb {
+    border-bottom: 5px solid rgb(44, 25, 10);
+}
+
+.wlogo {
+    width: 230px;
+}
+
+h2 {
+    color: whitesmoke;
+    font-size: 5rem;
+    text-align: center !important;
+    font-weight: bold;
+}
+
+.card-1 {
+    background-color: white;
+    padding: 100px;
+    border-radius: 10px;
+    box-shadow: 5px 2px 2px 2px whitesmoke;
+}
+
+.card-2 {
+    background-color: white;
+    padding: 100px 250px 250px;
+    border-radius: 10px;
+    box-shadow: 5px 2px 2px 2px whitesmoke;
+}
+
+li {
+    list-style: none;
+}
+
+.img-prod {
+    width: 500px;
+}
+
+.info {
+    padding: 50px;
+}
+
+.name {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.price {
+    font-size: 2rem;
+}
+
+.description {
+    font-size: 2rem;
+}
