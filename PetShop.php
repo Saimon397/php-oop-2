@@ -92,7 +92,7 @@ $PetAccessory2->setsize('50x50cm');
                             ?>
                         </div>
                         <div class="price"><?php echo $PetFood->getPrice() . ' €'  ?></div>
-                        <div><?php echo ($PetFood->getWeight()) ? ($PetFood2->getWeight() . ' Kg') : 'Leggero' ?></div>
+                        <div><?php echo ($PetFood->getWeight()) ? ($PetFood->getWeight() . ' Kg') : 'Leggero' ?></div>
                         <div><?php echo $PetFood->getExpirationDate()  ?></div>
                         <div><?php echo '<span>Ingredienti:</span> ';
                                 foreach ($PetFood->getIngredients() as $ingredient) echo $ingredient . ' ' ?></div>
